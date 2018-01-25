@@ -15,9 +15,36 @@
 
 declare namespace SpotifyApi {
 
+    type ISO_3166_1_Alpha_2 = "AF" | "AX" | "AL" | "DZ" | "AS" | "AD" | "AO" | "AI" | "AQ" | "AG" | "AR" | "AM" | "AW" | "AU" | "AT" | "AZ" | "BS" | "BH" | "BD" | "BB" | "BY" | "BE" | "BZ" | "BJ" | "BM" | "BT" | "BO" | "BA" | "BW" | "BV" | "BR" | "IO" | "BN" | "BG" | "BF" | "BI" | "KH" | "CM" | "CA" | "CV" | "KY" | "CF" | "TD" | "CL" | "CN" | "CX" | "CC" | "CO" | "KM" | "CG" | "CD" | "CK" | "CR" | "CI" | "HR" | "CU" | "CY" | "CZ" | "DK" | "DJ" | "DM" | "DO" | "EC" | "EG" | "SV" | "GQ" | "ER" | "EE" | "ET" | "FK" | "FO" | "FJ" | "FI" | "FR" | "GF" | "PF" | "TF" | "GA" | "GM" | "GE" | "DE" | "GH" | "GI" | "GR" | "GL" | "GD" | "GP" | "GU" | "GT" | "GG" | "GN" | "GW" | "GY" | "HT" | "HM" | "VA" | "HN" | "HK" | "HU" | "IS" | "IN" | "ID" | "IR" | "IQ" | "IE" | "IM" | "IL" | "IT" | "JM" | "JP" | "JE" | "JO" | "KZ" | "KE" | "KI" | "KR" | "KW" | "KG" | "LA" | "LV" | "LB" | "LS" | "LR" | "LY" | "LI" | "LT" | "LU" | "MO" | "MK" | "MG" | "MW" | "MY" | "MV" | "ML" | "MT" | "MH" | "MQ" | "MR" | "MU" | "YT" | "MX" | "FM" | "MD" | "MC" | "MN" | "ME" | "MS" | "MA" | "MZ" | "MM" | "NA" | "NR" | "NP" | "NL" | "AN" | "NC" | "NZ" | "NI" | "NE" | "NG" | "NU" | "NF" | "MP" | "NO" | "OM" | "PK" | "PW" | "PS" | "PA" | "PG" | "PY" | "PE" | "PH" | "PN" | "PL" | "PT" | "PR" | "QA" | "RE" | "RO" | "RU" | "RW" | "BL" | "SH" | "KN" | "LC" | "MF" | "PM" | "VC" | "WS" | "SM" | "ST" | "SA" | "SN" | "RS" | "SC" | "SL" | "SG" | "SK" | "SI" | "SB" | "SO" | "ZA" | "GS" | "ES" | "LK" | "SD" | "SR" | "SJ" | "SZ" | "SE" | "CH" | "SY" | "TW" | "TJ" | "TZ" | "TH" | "TL" | "TG" | "TK" | "TO" | "TT" | "TN" | "TR" | "TM" | "TC" | "TV" | "UG" | "UA" | "AE" | "GB" | "US" | "UM" | "UY" | "UZ" | "VU" | "VE" | "VN" | "VG" | "VI" | "WF" | "EH" | "YE" | "ZM" | "ZW";
+    type IntRange1_50 = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30 | 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45 | 46 | 47 | 48 | 49 | 50;
+        
     //
-    // Parameter Objects for searching
+    // Parameter Objects
     //
+
+    /**
+     * Object for query parameters for getting a User’s Saved Tracks
+     * See: [Search for an item](https://developer.spotify.com/web-api/get-users-saved-tracks/)
+     *
+     * @param market Optional. An ISO 3166-1 alpha-2 country code or the string from_token
+     * 
+     */
+    interface MarketParameter {
+        market?: ISO_3166_1_Alpha_2
+    }
+
+    /**
+     * Object for query parameters for getting a User’s Saved Tracks
+     * See: [Search for an item](https://developer.spotify.com/web-api/get-users-saved-tracks/)
+     *
+     * @param limit Optional. The maximum number of results to return. Default: 20. Minimum: 1. Maximum: 50.
+     * @param offset Optional. The index of the first result to return. Default: 0 (i.e., the first result). Maximum offset: 100.000. Use with limit to get the next page of search results.
+     * 
+     */
+    interface BasicQueryParameters extends MarketParameter {
+        limit?: IntRange1_50,
+        offset?: number
+    }
 
     /**
      * Object for search parameters for searching for tracks, playlists, artists or albums.
@@ -28,15 +55,14 @@ declare namespace SpotifyApi {
      *
      * @param q Required. The search query's keywords (and optional field filters and operators).
      * @param type Required. A comma-separated list of item types to search across. Valid types are: album, artist, playlist, and track.
-     * @param market Optional. An ISO 3166-1 alpha-2 country code or the string from_token
      * @param limit Optional. The maximum number of results to return. Default: 20. Minimum: 1. Maximum: 50.
      * @param offset Optional. The index of the first result to return. Default: 0 (i.e., the first result). Maximum offset: 100.000. Use with limit to get the next page of search results.
      */
-    interface SearchForItemParameterObject {
+    interface SearchForItemParameterObject extends MarketParameter {
         q?: string;
         type?: string;
-        market?: string;
-        limit?: number;
+        market?: ISO_3166_1_Alpha_2;
+        limit?: IntRange1_50;
         offset?: number;
     }
 
@@ -45,7 +71,6 @@ declare namespace SpotifyApi {
      * See: [Recommendations Based on Seeds](https://developer.spotify.com/web-api/get-recommendations/)
      *
      * @limit q Optional. The target size of the list of recommended tracks. For seeds with unusually small pools or when highly restrictive filtering is applied, it may be impossible to generate the requested number of recommended tracks. Debugging information for such cases is available in the response. Default: 20. Minimum: 1. Maximum: 100.
-     * @market q Optional. An ISO 3166-1 alpha-2 country code. Provide this parameter if you want to apply Track Relinking. Because min_*, max_* and target_* are applied to pools before relinking, the generated results may not precisely match the filters applied. Original, non-relinked tracks are available via the linked_from attribute of the relinked track response.
      * @max_ q Optional. Multiple values. For each tunable track attribute, a hard ceiling on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, max_instrumentalness=0.35 would filter out most tracks that are likely to be instrumental.
      * @min_ q Optional. Multiple values. For each tunable track attribute, a hard floor on the selected track attribute’s value can be provided. See tunable track attributes below for the list of available options. For example, min_tempo=140 would restrict results to only those tracks with a tempo of greater than 140 beats per minute.
      * @seed_artists q A comma separated list of Spotify IDs for seed artists. Up to 5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
@@ -53,9 +78,8 @@ declare namespace SpotifyApi {
      * @seed_tracks q A comma separated list of Spotify IDs for a seed track. Up to 5 seed values may be provided in any combination of seed_artists, seed_tracks and seed_genres.
      * @target_ q Optional. Multiple values. For each of the tunable track attributes (below) a target value may be provided. Tracks with the attribute values nearest to the target values will be preferred. For example, you might request target_energy=0.6 and target_danceability=0.8. All target values will be weighed equally in ranking results.
      */
-    interface RecommendationsOptionsObject {
+    interface RecommendationsOptionsObject extends MarketParameter {
         limit?: number,
-        market?: string,
         max_acousticness?: number,
         max_danceability?: number,
         max_duration_ms?: number,
@@ -967,5 +991,38 @@ declare namespace SpotifyApi {
         track: TrackObjectSimplified,
         played_at: string,
         context: ContextObject
+    }
+
+    /**
+     * Device Object
+     * https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/
+     */
+    interface DeviceObject {
+        id: string,
+        is_active: boolean,
+        is_restricted: boolean,
+        name: string,
+        type: string,
+        volume_percent: number
+    }
+
+    /**
+     * https://developer.spotify.com/web-api/get-the-users-currently-playing-track/
+     */
+    interface CurrentlyPlayingObject{
+        context: ContextObject,
+        timestamp: number,
+        progress_ms: number,
+        is_playing: boolean,
+        item: TrackObjectFull
+    }
+
+    /**
+     * https://developer.spotify.com/web-api/get-information-about-the-users-current-playback/
+     */
+    interface CurrentlyPlayingContext extends CurrentlyPlayingObject{
+        device: DeviceObject,
+        repeat_state: "off" | "track" | "context",
+        shuffle_state: boolean
     }
 }

@@ -1,31 +1,23 @@
 {
   "name": "spotify-web-api-js",
-  "description": "A client-side JS wrapper for the Spotify Web API",
-  "version": "0.22.1",
-  "homepage": "https://github.com/JMPerez/spotify-web-api-js",
+  "description": "A client-side TS wrapper for the Spotify Web API",
+  "version": "0.0.1",
+  "homepage": "https://github.com/rako77/spotify-web-api-js",
   "author": {
-    "name": "José M. Pérez"
+    "name": "Craig M, José M. Pérez"
   },
-  "main": "src/spotify-web-api.js",
+  "main": "src/spotify-web-api.ts",
   "typings": "src/typings/spotify-web-api.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/JMPerez/spotify-web-api-js"
+    "url": "git://github.com/rako77/spotify-web-api-js"
   },
   "devDependencies": {
-    "coveralls": "^2.13.1",
-    "eslint": "^4.1.0",
-    "jest-cli": "^20.0.0",
-    "q": "^1.4.1",
-    "sinon": "^3.0.0"
-  },
-  "scripts": {
-    "lint": "eslint src/*.js",
-    "test": "npm run lint && jest --coverage",
-    "travis": "npm test && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "tslint-microsoft-contrib": "^5.0.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "files": [
-    "src/*.js",
+    "src/*.ts",
     "src/typings/*.d.ts"
   ],
   "keywords": [
